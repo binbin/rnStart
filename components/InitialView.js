@@ -32,10 +32,6 @@ const vMargin = (screenW - cellWH * cols) / (cols + 1);
 const hMargin = 25;  
 
 
-shareData=[{
-	icon:'https://facebook.github.io/react/img/logo_og.png',
-	title:'xxx'
-}]
 
 
 export default class InitialView extends Component{
