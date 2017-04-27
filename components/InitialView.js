@@ -26,7 +26,7 @@ const screenW = Dimensions.get('window').width;
 var shareData = require('./shareData.json');  
   
 // 常量设置  
-const cols = 3;  
+const cols = 2;  
 const cellWH = 100;  
 const vMargin = (screenW - cellWH * cols) / (cols + 1);  
 const hMargin = 25;  
@@ -75,7 +75,7 @@ const rightButtonConfig = {
 };
 
 const titleConfig = {
-  title: 'Hello, world',
+  title: '公考致胜法宝',
 };
 
 
