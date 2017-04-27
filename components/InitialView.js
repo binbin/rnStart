@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
 	},  
   
 	iconStyle:{  
-		width:80,  
+		width:screenW-20,  
 		height:80,  
 	},  
   
