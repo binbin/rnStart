@@ -31,6 +31,9 @@ const cellWH = 100;
 const vMargin = (screenW - cellWH * cols) / (cols + 1);  
 const hMargin = 25;  
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+const myIcon = (<Icon name="rocket" size={30} color="#900" />)
+
 
 
 
@@ -61,6 +64,7 @@ export default class InitialView extends Component{
 	renderRow(rowData){  
 		return(<TouchableOpacity activeOpacity={0.8} onPress={()=>{AlertIOS.alert('点击了')}} >  
 				<View style={styles.innerViewStyle}>  
+				<Icon name="rocket" size={30} color="#900" />
 					<Image source={{uri:rowData.icon}} style={styles.iconStyle} />  
 					<Text>{rowData.title}</Text>  
 				</View>  
