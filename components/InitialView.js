@@ -27,7 +27,9 @@ var shareData = require('./shareData.json');
   
 // 常量设置  
 const cols = 2;  
-const cellWH = 100;  
+// const cellWH = 100;  
+const cellWH = screenW / 2 -1
+
 const vMargin = (screenW - cellWH * cols) / (cols + 1);  
 const hMargin = 25;  
 
@@ -66,7 +68,7 @@ export default class InitialView extends Component{
 		return(<TouchableOpacity activeOpacity={0.8} onPress={()=>{AlertIOS.alert('点击了')}} >  
 				<View style={styles.innerViewStyle}>  
 					<Icon name="rocket" size={40} color="#900" />
-					<Image source={{uri:rowData.icon}} style={styles.iconStyle} />  
+					 
 					<Text>{rowData.title}</Text>  
 					<Icon.Button name="facebook" backgroundColor="#3b5998">
 					    <Text style={{fontFamily: 'Arial', fontSize: 15}}>Login with Facebook</Text>
@@ -78,7 +80,7 @@ export default class InitialView extends Component{
 }
 
 const rightButtonConfig = {
-  title: '下一页',
+  title: 'Next',
   handler: () => alert('hello!'),
 };
 
@@ -95,15 +97,18 @@ const styles = StyleSheet.create({
 		flexWrap:'wrap',  
 		// 侧轴方向  
 		alignItems:'center', // 必须设置,否则换行不起作用  
+		borderWidth:1 
 	},  
   
 	innerViewStyle:{  
 		width:cellWH,  
 		height:cellWH,  
-		marginLeft:vMargin,  
-		marginTop:hMargin,  
+		// marginLeft:vMargin,  
+		// marginTop:hMargin,  
 		// 文字内容居中对齐  
-		alignItems:'center'  
+		alignItems:'center' ,
+		borderColor:'red',
+		borderWidth:1 
 	},  
   
 	iconStyle:{  
