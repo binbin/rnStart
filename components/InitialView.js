@@ -65,7 +65,8 @@ export default class InitialView extends Component{
 		)
 	}
 	renderRow(rowData){  
-		return(<TouchableOpacity activeOpacity={0.8} onPress={()=>{AlertIOS.alert('点击了')}} >  
+		var _navigator = this.props.navigator
+		return(<TouchableOpacity activeOpacity={0.8} onPress={ () => _navigator.push({title:rowData.title,id:'list'}) }  >  
 				<View style={styles.innerViewStyle}>  
 					<Icon name={rowData.icon} size={40} color="#900" />
 					 
@@ -83,7 +84,7 @@ const rightButtonConfig = {
 };
 
 const titleConfig = {
-  title: '公考致胜法宝',
+  title: '首页',
 };
 
 
@@ -94,8 +95,7 @@ const styles = StyleSheet.create({
 		// 一行显示不下,换一行  
 		flexWrap:'wrap',  
 		// 侧轴方向  
-		alignItems:'center', // 必须设置,否则换行不起作用  
-		borderWidth:1 
+		alignItems:'center'// 必须设置,否则换行不起作用  
 	},  
   
 	innerViewStyle:{  
