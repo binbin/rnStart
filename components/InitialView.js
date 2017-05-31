@@ -35,7 +35,7 @@ const hMargin = 25;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const myIcon = (<Icon name="rocket" size={30} color="#900" />)
+const myIcon = (<Icon name="commenting-o" size={30} color="#900" />)
 
 
 
@@ -67,12 +67,10 @@ export default class InitialView extends Component{
 	renderRow(rowData){  
 		return(<TouchableOpacity activeOpacity={0.8} onPress={()=>{AlertIOS.alert('点击了')}} >  
 				<View style={styles.innerViewStyle}>  
-					<Icon name="rocket" size={40} color="#900" />
+					<Icon name={rowData.icon} size={40} color="#900" />
 					 
 					<Text>{rowData.title}</Text>  
-					<Icon.Button name="facebook" backgroundColor="#3b5998">
-					    <Text style={{fontFamily: 'Arial', fontSize: 15}}>Login with Facebook</Text>
-					</Icon.Button>
+					
 				</View>  
 			</TouchableOpacity>  
 		);  
@@ -105,10 +103,13 @@ const styles = StyleSheet.create({
 		height:cellWH,  
 		// marginLeft:vMargin,  
 		// marginTop:hMargin,  
-		// 文字内容居中对齐  
+		 
+		
+		borderColor:'#666',
+		borderWidth:0.2,
+		// 文字内容居中对齐 
 		alignItems:'center' ,
-		borderColor:'red',
-		borderWidth:1 
+		justifyContent: 'center'
 	},  
   
 	iconStyle:{  
