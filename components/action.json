@@ -1,0 +1,25 @@
+[{
+	icon:'commenting-o',
+	title:'纵横点评',
+	action:'zonghengdianping'
+},{
+	icon:'user-circle-o',
+	title:'面试真经',
+	action:'mianshizhenjing'
+},{
+	icon:'rss-square',
+	title:'评论员文章',
+	action:'pinglunyuan'
+},{
+	icon:'pagelines',
+	title:'申论突破',
+	action:'shenluntupo'
+},{
+	icon:'flag-checkered',
+	title:'面试真题',
+	action:'mianshizhenti'
+},{
+	icon:'file-image-o',
+	title:'申论真题',
+	action:'shenlunzhenti'
+}]
