@@ -41,7 +41,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const myIcon = (<Icon name="commenting-o" size={30} color="#900" />)
 
 
-import SQLite from './SQLite'; 
+import SQLite from './sqlite_tools'; 
 
 var sqLite = new SQLite();  
 var db;  
@@ -54,7 +54,7 @@ export default class InitialView extends Component{
 	if(!db){  
 	  db = sqLite.open();  
 	}  
-	//建表  
+	/*//建表  
 	sqLite.createTable();  
 	//删除数据  
 	sqLite.deleteData();  
@@ -69,7 +69,7 @@ export default class InitialView extends Component{
 	user.qq = "111222";  
 	userData.push(user);  
 	//插入数据  
-	sqLite.insertUserData(userData);  
+	sqLite.insertUserData(userData);  */
 	//查询  
 	db.transaction((tx)=>{  
 	  tx.executeSql("select * from user", [],(tx,results)=>{  
@@ -81,6 +81,7 @@ export default class InitialView extends Component{
 	    }  
 	  });  
 	},(error)=>{//打印异常信息  
+		alert('xxx')
 	  console.log(error);  
 	});  
 	}  

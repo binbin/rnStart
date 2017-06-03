@@ -45,9 +45,9 @@ export default class ListComponent extends Component{
 	    );
 	  }
       componentWillMount() {
-        var lists = require('./data/'+this.props.route.action+'.json'); 
-        alert(lists) 
-        alert(this.props.route.action)
+        // var lists = require('./data/'+this.props.route.action+'.json'); 
+        // alert(lists) 
+        // alert(this.props.route.action)
       }
       componentDidMount () {
         BackAndroid.addEventListener('hardwareBackPress', this.handleBack)

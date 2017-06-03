@@ -20,10 +20,10 @@ export default class  SQLite extends Component{
   }  
   open(){  
     db = SQLiteStorage.openDatabase(  
-      database_name,  
-      database_version,  
-      database_displayname,  
-      database_size,  
+      {
+        name : "db", 
+        createFromLocation : "~db.sqlite"
+     },  
       ()=>{  
           this._successCB('open');  
       },  
@@ -124,7 +124,7 @@ export default class  SQLite extends Component{
     console.log("SQLiteStorage "+name+" success");  
   }  
   _errorCB(name, err){  
-    console.log("SQLiteStorage "+name);  
+    console.log("SQLiteStorage "+name+" error");  
     console.log(err);  
   }  
     render(){  
