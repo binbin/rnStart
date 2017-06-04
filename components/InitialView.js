@@ -105,7 +105,7 @@ export default class InitialView extends Component{
 	}
 	renderRow(rowData){  
 		var _navigator = this.props.navigator
-		return(<TouchableOpacity activeOpacity={0.8} onPress={ () => _navigator.push({title:rowData.title,id:'list',action:this.state.types}) }  >  
+		return(<TouchableOpacity activeOpacity={0.8} onPress={ () => _navigator.push({title:rowData.title,id:'list',list_id:rowData.id}) }  >  
 				<View style={styles.innerViewStyle}>  
 					<Icon name={rowData.icon} size={40} color="#900" />
 					 
