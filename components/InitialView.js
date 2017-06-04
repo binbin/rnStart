@@ -47,39 +47,34 @@ var sqLite = new SQLite();
 var db;  
 export default class InitialView extends Component{
 	compennetDidUnmount(){  
-	sqLite.close();  
+		sqLite.close();  
 	}  
 	componentWillMount(){  
-	//开启数据库  
-	if(!db){  
-	  db = sqLite.open();  
-	}  
-	/*//建表  
-	sqLite.createTable();  
-	//删除数据  
-	sqLite.deleteData();  
-	//模拟一条数据  
-	var userData = [];  
-	var user = {};  
-	user.name = "张三";  
-	user.age = "28";  
-	user.sex = "男";  
-	user.phone = "18900001111";  
-	user.email = "2343242@qq.com";  
-	user.qq = "111222";  
-	userData.push(user);  
-	//插入数据  
-	sqLite.insertUserData(userData);  */
-	//查询  
-	db.transaction((tx)=>{  
-	  tx.executeSql("select * from user", [],(tx,results)=>{  
-	    var len = results.rows.length;  
-	    for(let i=0; i<len; i++){  
-	      var u = results.rows.item(i);  
-	      //一般在数据查出来之后，  可能要 setState操作，重新渲染页面  
-	      alert("姓名："+u.name+"，年龄："+u.age+"，电话："+u.phone);  
-	    }  
-	  });  
+		//开启数据库  
+		if(!db){  
+		  db = sqLite.open();  
+		}  
+		
+		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
+		var types=[]
+		db.transaction((tx)=>{  
+		  tx.executeSql("select * from content_type", [],(tx,results)=>{  
+		    var len = results.rows.length;  
+		    for(let i=0; i<len; i++){  
+		      var t = results.rows.item(i);  
+		      //一般在数据查出来之后，  可能要 setState操作，重新渲染页面  
+		      // console.log(t.icon)
+		      types.push({
+		      	icon:t.icon,
+		      	title:t.name,
+		      	id:t.id
+		      })
+		    } 
+		     this.setState({
+		    	dataSource: ds.cloneWithRows(types)
+		     }) 
+		  });  
+		 
 	},(error)=>{//打印异常信息  
 		alert('xxx')
 	  console.log(error);  
@@ -88,9 +83,9 @@ export default class InitialView extends Component{
 	constructor(props) {
 		super(props);
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
-	this.state = {
-	  dataSource: ds.cloneWithRows(action),
-	}
+		this.state = {
+		     dataSource: ds.cloneWithRows([])
+		}
 	}
 	render(){
 		return(  
@@ -110,7 +105,7 @@ export default class InitialView extends Component{
 	}
 	renderRow(rowData){  
 		var _navigator = this.props.navigator
-		return(<TouchableOpacity activeOpacity={0.8} onPress={ () => _navigator.push({title:rowData.title,id:'list',action:rowData.action}) }  >  
+		return(<TouchableOpacity activeOpacity={0.8} onPress={ () => _navigator.push({title:rowData.title,id:'list',action:this.state.types}) }  >  
 				<View style={styles.innerViewStyle}>  
 					<Icon name={rowData.icon} size={40} color="#900" />
 					 
