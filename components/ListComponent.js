@@ -13,19 +13,59 @@ import {
 
 import NavigationBar from 'react-native-navbar';
 
+import SQLite from './sqlite_tools'; 
+
+var sqLite = new SQLite();  
+var db;  
+
+
 export default class ListComponent extends Component{
 	constructor(props) {
 	  	super(props);
             this.handleBack = this.handleBack.bind(this);
 
 	  	const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-	    this.state = {
-	      dataSource: ds.cloneWithRows([{title:'今日谈：落实是最好的答复'}, {title:'今日谈：“带回去研究”得有下文'}]),
-	    };
+	      this.state = {
+	        dataSource: ds.cloneWithRows([])
+	      };
 	  }
+        compennetDidUnmount(){  
+          sqLite.close();  
+
+          BackAndroid.addEventListener('hardwareBackPress', this.handleBack)
+        }
+        componentWillMount(){
+          //开启数据库  
+          if(!db){  
+            db = sqLite.open();  
+          } 
+          const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
+          var list  = []
+          db.transaction((tx)=>{  
+          tx.executeSql("select id,title from content where type_id = ?", [this.props.route.list_id],(tx,results)=>{  
+                      var len = results.rows.length;  
+                      for(let i=0; i<len; i++){  
+                        var t = results.rows.item(i);  
+                        list.push({
+                          id:t.id,
+                          title:t.title
+                        })
+                      } 
+                      this.setState({
+                        dataSource: ds.cloneWithRows(list)
+                      }) 
+                    }); 
+              },(error)=>{//打印异常信息  
+                alert('xxx')
+                console.log(error);  
+              });  
+
+          BackAndroid.removeEventListener('hardwareBackPress', this.handleBack)
+        }  
+
 	  _renderRow(rowData, sectionID, rowID, highlightRow){
 	  	  var _navigator = this.props.navigator
-	  	  return (<TouchableOpacity onPress={ () => _navigator.push({title:'Http',id:'content'}) }  style={ styles.button }>
+	  	  return (<TouchableOpacity onPress={ () => _navigator.push({content_id:rowData.id,content_title:rowData.title,id:'content'}) }  style={ styles.button }>
                                 <View style={styles.innerViewStyle}>
                                     <Text style={styles.textStyle}>{rowData.title}</Text>
                                 </View>
@@ -44,17 +84,6 @@ export default class ListComponent extends Component{
                         </View>
 	    );
 	  }
-      componentWillMount() {
-        // var lists = require('./data/'+this.props.route.action+'.json'); 
-        // alert(lists) 
-        // alert(this.props.route.action)
-      }
-      componentDidMount () {
-        BackAndroid.addEventListener('hardwareBackPress', this.handleBack)
-      }
-      componentWillUnmount () {
-        BackAndroid.removeEventListener('hardwareBackPress', this.handleBack)
-      }
       handleBack(){
             var navigator = this.props.navigator;
             if (navigator && navigator.getCurrentRoutes().length > 1) {

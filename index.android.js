@@ -28,6 +28,7 @@ import InitialView from './components/InitialView'
 
 
 
+
 var _navigator;
 
 var firstClick = 0;
@@ -54,7 +55,11 @@ export default class rnStart extends Component{
                 return (
                   <ListComponent navigator={navigator} route={route}  />
                  );
-            }
+            }else if(route.id === 'content'){
+              return (
+                <ContentComponent navigator={navigator} route={route}  />
+              );
+            }  
       }
       componentDidMount () {
         BackAndroid.addEventListener('hardwareBackPress', this.handleBack)

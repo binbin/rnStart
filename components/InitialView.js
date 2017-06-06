@@ -38,7 +38,7 @@ const hMargin = 25;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const myIcon = (<Icon name="commenting-o" size={30} color="#900" />)
+// const myIcon = (<Icon name="commenting-o" size={30} color="#900" />)
 
 
 import SQLite from './sqlite_tools'; 
